@@ -1,0 +1,34 @@
+<%- include ("../partials/head.ejs") %>
+<body>
+        <%- include ("../partials/menu.ejs") %>
+
+<!-- 1. Changed justify-content-left to justify-content-start -->
+<!-- Single outer flex container that centers all inner child items on the screen -->
+<div class="d-flex justify-content-center flex-wrap gap-4 my-4">
+
+    <!-- Left Card Box -->
+    <div class="card text-center" style="width: 18rem;">
+        <img class="img-fluid rounded-top" src="../images/haveQuestions.png" alt="Card image cap">
+        <div class="card-body">
+            <p class="card-text">Have any questions, comments, or concerns? Reach out to our Email Hotline.</p>
+            <a href="mailto:purduebookstore@example.com" class="btn btn-warning w-100">Send an Email</a>
+        </div>
+    </div>
+
+    <!-- Right Card Box -->
+    <div class="card text-center" style="width: 18rem;">
+        <img class="img-fluid rounded-top" src="../images/VisitUs.png" alt="Card image cap">
+        <div class="card-body">
+            <p class="card-text">
+                Address: Campus Address Room 303
+            </p>
+        </div>
+    </div>
+
+</div>
+
+
+
+    <%- include("../partials/footer") %>
+</body>
+</html>
