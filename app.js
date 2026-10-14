@@ -1,0 +1,44 @@
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+import { setUpDatabase, getDbConnection } from './database.js';
+
+const app = express();
+const port = 3000;
+
+setUpDatabase().catch((error)=>{
+    console.error(error);
+})
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(__dirname + '/public'));
+
+app.set('view engine', 'ejs');
+
+app.get('/',(req, res)=>{
+    getDbConnection().then((db)=>{
+        return db.all('SELECT * FROM books');
+    }).then((books)=>{
+        res.render('pages/index',{
+            data: books,
+            title: 'Purdue Golden Book Supply',
+        });
+    }).catch((error)=>{
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    });
+});
+
+app.get('/about', (req, res)=>{
+    res.render('pages/about', {title: "About Us"});
+});
+
+app.get('/contact', (req, res) =>{
+    res.render('pages/contact', {title:"Contact Us"});
+});
+
+app.listen(port, () =>{
+    console.log(`App listening at port ${port}`);
+});
