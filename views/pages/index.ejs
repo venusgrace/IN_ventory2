@@ -1,20 +1,23 @@
 <%- include('../partials/head.ejs')%>
-
-<div class="mt-4 p-5 bg-warning text-white rounded">
-    <h1><%= title %></h1>
-</div>
 <%- include('../partials/menu.ejs') %>
-<body>
-    <p>Temporary Data</p>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
+<body>
+    <div class="row row-cols-1 row-cols-sm-2 justify-content-center m-3">
+        <% data.forEach((books, index)=>{ %>
+            <div class="card" style="width: 18rem;">
+                <img src="/images/<%= books.imageLink %>" class="card-img-top" alt="<%= books.bookTitle %>" style="height: 200px; object-fit: contain;">
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align: center;"><%= books.bookTitle %></h5>
+                    <p class="card-text" style="text-align: center;">Author: <%= books.bookAuthor %></p>
+                    <br>
+                    <button type="button" class="books btn btn-warning" data-bs-toggle="modal" data-bs-target="#booksModal-<%= index %>">
+                        Book Information
+                    </button>
+                </div>
+            </div>
+            <%- include('../partials/booksModal.ejs', {books: books, id: index})%>
+        <% }) %>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
